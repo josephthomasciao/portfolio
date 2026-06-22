@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joseph Ciao — Resume</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── RESUME-SPECIFIC ─────────────────────────────── */
+    .resume {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 3rem 2.5rem;
+    }
+    .r-header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .r-name {
+      font-family: var(--display);
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 0.95;
+    }
+    .r-name span { color: var(--red); }
+    .r-tagline {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+    .r-contact {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      color: var(--ink-soft);
+      text-align: right;
+      line-height: 1.9;
+    }
+    .r-contact a { color: var(--ink-soft); }
+    .r-section { margin-bottom: 1.5rem; }
+    .r-section-title {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--line2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .r-section-title::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+    .r-summary {
+      font-size: 11.5px;
+      color: var(--ink-soft);
+      line-height: 1.85;
+    }
+    .r-entry { margin-bottom: 1.1rem; }
+    .r-entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .r-entry-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.3px;
+    }
+    .r-entry-org { color: var(--red); }
+    .r-entry-meta {
+      font-size: 9.5px;
+      letter-spacing: 1px;
+      color: var(--dim);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .r-entry-loc {
+      font-size: 9.5px;
+      letter-spacing: 1px;
+      color: var(--mute);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .r-bullets {
+      list-style: none;
+      margin: 4px 0 0;
+      padding: 0;
+    }
+    .r-bullets li {
+      font-size: 11px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      padding-left: 1rem;
+      position: relative;
+      margin-bottom: 3px;
+    }
+    .r-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--red);
+    }
+    .r-skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 2rem;
+    }
+    .r-skill-row { font-size: 11px; line-height: 1.6; }
+    .r-skill-cat {
+      color: var(--ink);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .r-skill-list { color: var(--ink-soft); }
+    .r-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .r-print-hint {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--mute);
+      text-transform: uppercase;
+      margin: 0 auto 1.5rem;
+      max-width: 920px;
+      padding: 0 2.5rem;
+    }
+    .r-print-btn {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.5rem 1.25rem;
+      border: 2px solid var(--red);
+      background: var(--red);
+      color: #fff;
+      cursor: pointer;
+      margin-left: 0.75rem;
+    }
+
+    /* ── PRINT ───────────────────────────────────────── */
+    @media print {
+      nav, .ticker, .r-print-hint { display: none !important; }
+      body { background: #fff; padding: 0; }
+      .page { padding: 0; }
+      .resume { padding: 0.5in 0.6in; max-width: none; }
+      .r-name { font-size: 32px; }
+      .r-entry, .r-section { margin-bottom: 0.9rem; }
+      .r-summary, .r-bullets li, .r-skill-row { font-size: 10px; }
+      @page { margin: 0.4in; }
+    }
+
+    @media (max-width: 640px) {
+      .resume { padding: 2rem 1.25rem; }
+      .r-header { flex-direction: column; align-items: flex-start; }
+      .r-contact { text-align: left; }
+      .r-skills-grid, .r-two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">J<span>.</span>Ciao</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="resume.html" class="active">Resume</a></li>
+      <li><a href="index.html#about">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <div class="r-print-hint">
+      Tip: use your browser's Print → Save as PDF for a clean one-page download
+      <button class="r-print-btn" onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <div class="resume">
+
+      <!-- HEADER -->
+      <div class="r-header">
+        <div>
+          <div class="r-name">Joseph <span>Ciao</span></div>
+          <div class="r-tagline">Mechanical Engineer · Vehicle Dynamics &amp; Motorsport Data</div>
+        </div>
+        <div class="r-contact">
+          josephthomasciao@gmail.com<br>
+          (928) 303-0795<br>
+          <a href="https://www.linkedin.com/in/joseph-ciao-516b66235/" target="_blank" rel="noopener">linkedin.com/in/joseph-ciao</a><br>
+          Clarksville, TN · Open to Relocation
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="r-section">
+        <div class="r-section-title">Profile</div>
+        <p class="r-summary">
+          Mechanical engineer with a foundation in suspension design, professional-grade
+          motorsport data analysis, and hands-on reliability engineering. Experience spans
+          Formula SAE structural design, endurance race engineering using Garage 61 coaching
+          and Cosworth Pi Toolbox telemetry, and maintenance/reliability work in a high-volume
+          manufacturing environment. Seeking roles in vehicle evaluation, ride &amp; handling,
+          test engineering, and motorsport-adjacent vehicle development.
+        </p>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="r-section">
+        <div class="r-section-title">Technical Skills</div>
+        <div class="r-skills-grid">
+          <div class="r-skill-row">
+            <span class="r-skill-cat">Motorsport / Data:</span>
+            <span class="r-skill-list">Garage 61 coaching, Cosworth Pi Toolbox, lap &amp; channel analysis, driver feedback systems, setup development, endurance strategy</span>
+          </div>
+          <div class="r-skill-row">
+            <span class="r-skill-cat">Vehicle Dynamics:</span>
+            <span class="r-skill-list">Suspension &amp; pushrod design, motion ratio, ride &amp; handling fundamentals, tire/vehicle behavior, benchmarking</span>
+          </div>
+          <div class="r-skill-row">
+            <span class="r-skill-cat">Analysis / Programming:</span>
+            <span class="r-skill-list">MATLAB, Python, Microsoft Excel, data acquisition, root-cause analysis, technical reporting</span>
+          </div>
+          <div class="r-skill-row">
+            <span class="r-skill-cat">CAD / Mechanical:</span>
+            <span class="r-skill-list">SolidWorks, ANSYS FEA, Blender, DFM (waterjet), reliability &amp; preventive maintenance, mill / lathe / drilling</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="r-section">
+        <div class="r-section-title">Experience</div>
+
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <span class="r-entry-title">Mechanical Utility Engineer I — <span class="r-entry-org">Hankook Tire Manufacturing Tennessee, LP</span></span>
+            <span class="r-entry-meta">Sep 2025 – Present</span>
+          </div>
+          <div class="r-entry-loc">Clarksville, TN</div>
+          <ul class="r-bullets">
+            <li>Maintenance/reliability engineer for freight and passenger elevators — uptime, safety, troubleshooting, and preventive/corrective maintenance planning.</li>
+            <li>Support mechanical utility systems (boilers, air compressors, chillers, HVAC) in a high-volume tire manufacturing environment.</li>
+            <li>Identify recurring equipment issues and develop reliability improvements that reduce downtime risk and improve maintainability.</li>
+            <li>Evaluate utility cost-reduction opportunities; coordinate with technicians, vendors, and operations.</li>
+          </ul>
+        </div>
+
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <span class="r-entry-title">Maintenance / Campus Operations Support — <span class="r-entry-org">Northern Arizona University</span></span>
+            <span class="r-entry-meta">Aug 2022 – Aug 2024</span>
+          </div>
+          <div class="r-entry-loc">Flagstaff, AZ</div>
+          <ul class="r-bullets">
+            <li>Supported campus operations through vehicle assistance, snow response, facility and sign repair, and equipment maintenance while maintaining safe, reliable service response.</li>
+          </ul>
+        </div>
+
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <span class="r-entry-title">Math Tutor — <span class="r-entry-org">Mohave Community College</span></span>
+            <span class="r-entry-meta">Aug 2021 – Aug 2022</span>
+          </div>
+          <div class="r-entry-loc">Kingman, AZ</div>
+          <ul class="r-bullets">
+            <li>Tutored math, chemistry, and engineering coursework — strengthening technical communication, analytical problem solving, and documentation skills.</li>
+          </ul>
+        </div>
+
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <span class="r-entry-title">Maintenance / Lead Operator — <span class="r-entry-org">Cascades Tissue Group</span></span>
+            <span class="r-entry-meta">Feb 2014 – Jul 2017</span>
+          </div>
+          <div class="r-entry-loc">Kingman, AZ</div>
+          <ul class="r-bullets">
+            <li>Maintained and repaired production line machinery; trained operators and collaborated with production teams to improve line uptime and safe machine operation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="r-section">
+        <div class="r-section-title">Engineering Projects</div>
+
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <span class="r-entry-title">LMP2 24H Le Mans Race Engineering — <span class="r-entry-org">Brewster Motorsports (iRacing)</span></span>
+            <span class="r-entry-meta">2024 – Present</span>
+          </div>
+          <ul class="r-bullets">
+            <li>Lead setup development for a 5-driver endurance team; iterated through multiple setup versions in response to a mid-preparation Balance of Performance change.</li>
+            <li>Built a structured driver feedback protocol (7 metrics correlated to track temperature), with Garage 61 coaching and Cosworth Pi Toolbox workflows for lap comparison and channel review.</li>
+            <li>Used tire temperature and wear data to drive camber and balance decisions; managed multi-timezone stint strategy and driver coaching.</li>
+          </ul>
+        </div>
+
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <span class="r-entry-title">Formula SAE Pushrod Assembly — <span class="r-entry-org">NAU Senior Capstone</span></span>
+            <span class="r-entry-meta">2024 – 2025</span>
+          </div>
+          <ul class="r-bullets">
+            <li>Designed pushrod, rocker arm, and damper packaging for a Formula SAE suspension; refined rocker geometry for strength, manufacturability, and weight.</li>
+            <li>Solved a manufacturing-constrained structural problem (waterjet-only / DFM) while accounting for motion ratio, load paths, and damper stroke; validated with ANSYS FEA.</li>
+            <li>Built a full-car Blender model to support simulator-based vehicle development.</li>
+          </ul>
+        </div>
+
+        <div class="r-entry">
+          <div class="r-entry-head">
+            <span class="r-entry-title">Additional Projects</span>
+          </div>
+          <ul class="r-bullets">
+            <li>Bevel gear drivetrain and low-cost liquid heat exchanger — shaft/bearing selection, packaging, flow-rate and leak-free targets (NAU, 2024).</li>
+            <li>Introductory wind tunnel flow visualization using smoke-flow and 3D-printed models (Mohave CC, 2021–2022).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="r-section">
+        <div class="r-section-title">Education</div>
+        <div class="r-two-col">
+          <div class="r-entry" style="margin-bottom:0;">
+            <div class="r-entry-title">B.S., Mechanical Engineering</div>
+            <div class="r-entry-loc">Northern Arizona University · May 2025 · GPA 3.1</div>
+          </div>
+          <div class="r-entry" style="margin-bottom:0;">
+            <div class="r-entry-title">A.S., Mechanical Engineering</div>
+            <div class="r-entry-loc">Mohave Community College · May 2022 · GPA 3.6</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span>RESUME</span> Joseph Ciao — Mechanical Engineer</span>
+      <span class="ticker-item"><span>FOCUS</span> Vehicle Dynamics · Motorsport Data · Reliability</span>
+      <span class="ticker-item"><span>TOOLS</span> Garage 61 · Cosworth Pi · SolidWorks · ANSYS · MATLAB</span>
+      <span class="ticker-item"><span>RESUME</span> Joseph Ciao — Mechanical Engineer</span>
+      <span class="ticker-item"><span>FOCUS</span> Vehicle Dynamics · Motorsport Data · Reliability</span>
+      <span class="ticker-item"><span>TOOLS</span> Garage 61 · Cosworth Pi · SolidWorks · ANSYS · MATLAB</span>
+    </div>
+  </div>
+
+</body>
+</html>
